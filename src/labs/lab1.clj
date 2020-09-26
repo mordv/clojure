@@ -14,8 +14,8 @@
    )
   )
 
-(defn combineEach
-  ([elements list] (combineEach elements list '()))
+(defn combine-each
+  ([elements list] (combine-each elements list '()))
   ([elements list acc] (if (empty? elements)
                          (flatten acc)
                          (recur (drop-last elements) list (conj acc (combine (last elements) list)))
@@ -29,7 +29,7 @@
   ([list len acc] (cond
                     (zero? len) '()
                     (= len 1) acc
-                    :else (recur list (dec len) (combineEach acc list))
+                    :else (recur list (dec len) (combine-each acc list))
                     ))
   )
 

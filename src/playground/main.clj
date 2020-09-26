@@ -1,4 +1,4 @@
-(ns main)
+(ns playground.main)
 
 (defn myFunc
   ([] (println "no args"))
