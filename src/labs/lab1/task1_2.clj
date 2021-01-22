@@ -1,5 +1,5 @@
-(ns labs.lab1)
-
+(ns labs.lab1.task1_2
+  (:use labs.lab1.utils))
 
 (defn combine
   ([element list] (combine (str element) list '()))
@@ -33,15 +33,8 @@
                     ))
   )
 
-(defn not-repeated
-  ([value] (re-find #"(.)\1+" (str value))))
-
-(defn assert-not-repeating
-  ([list] (not-any? not-repeated list)))
-
-
 (let [input '(\a \b \c \d)
-      size 4
+      size 5
       res (perm input size)]
   (println res)
   (println (assert-not-repeating res))
