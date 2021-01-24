@@ -13,7 +13,10 @@
                   (inc i)])
                [0 0])))
 
+(def lazy-partial-integral-sums-m
+  (memoize lazy-partial-integral-sums))
+
 (defn integral-partial-sums
   [f]
   (fn [x] (let [n (get-steps-count x)]
-            (nth (lazy-partial-integral-sums f) n))))
+            (nth (lazy-partial-integral-sums-m f) n))))

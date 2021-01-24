@@ -1,6 +1,6 @@
 (ns labs.lab3.task1)
 
-(def filter-partition-size 2)
+(def filter-partition-size 10)
 
 (defn my-partition
   ([part-size coll] (my-partition part-size coll `()))
@@ -11,14 +11,10 @@
                                  (concat acc [(take part-size coll)]))))
   )
 
-(defn my-pmap [f batches]
-  (->>
-    (map (fn [x] (future (f x))) batches)
-    (doall)))
-
 (defn parallel-filter
   [pred coll] (->> (my-partition filter-partition-size coll)
-                   (my-pmap (fn [x] (doall (filter pred x))))
+                   (map (fn [part-coll] (future (doall (filter pred part-coll)))))
+                   (doall)
                    (map deref)
-                   (apply concat)
+                   (flatten)
                    ))
